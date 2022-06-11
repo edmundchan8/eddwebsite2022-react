@@ -1,11 +1,11 @@
 import * as React from 'react'
 import ReactDOM from 'react-dom'
-import Index from './index';
 import Navigation from './navigation';
+import '../styles/App.css';
 
 function App() {
   return (
-    <div>
+    <div className="app align-middle">
         <Navigation />
     </div>
   );

@@ -2,7 +2,7 @@ import * as React from 'react'
 
 function AboutPage () {
     return(
-        <div>
+        <div className="align-middle">
             <p>About Me</p>
             <p>Web Application Developer for Cultivate Learning at the University of Washington</p>
             <p>MAMP Stack</p>

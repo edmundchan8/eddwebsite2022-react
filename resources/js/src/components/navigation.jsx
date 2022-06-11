@@ -7,10 +7,10 @@ import Applications from '../pages/applications';
 function Navigation(){
     return (
         <BrowserRouter>
-            <header>
-            <title>Edmund Chi Hong Chan</title>
-            <p>Edmund Chi Hong Chan</p>
-            <p>Web Application Developer</p>
+        <title>Edmund Chi Hong Chan</title>
+            <header className='navigation-bar'>
+                <p>Edmund Chi Hong Chan</p>
+                <p>Web Application Developer</p>
             </header>
             <nav>
                 <NavLink to="">Home</NavLink>

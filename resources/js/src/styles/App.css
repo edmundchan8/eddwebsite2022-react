@@ -1,0 +1,14 @@
+.app {
+    margin: 1rem;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+.align-middle{
+  text-align: center;
+}
+
+/* NAVIGATION */
+
+.navigation-bar{
+  display: inline-block;
+}
