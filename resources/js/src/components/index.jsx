@@ -1,9 +1,11 @@
 import * as React from 'react'
-import AboutPage from '../pages/about';
+import AboutPage from './about';
+import Heading from './heading';
 
 function Index() {
   return (
     <div>
+      <Heading />
       <AboutPage />
     </div>
   );

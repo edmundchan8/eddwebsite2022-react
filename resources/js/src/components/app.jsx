@@ -5,9 +5,9 @@ import '../styles/App.css';
 
 function App() {
   return (
-    <div className="app align-middle">
-        <Navigation />
-    </div>
+      <div className="app align-middle">
+          <Navigation />
+      </div>
   );
 }
 

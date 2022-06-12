@@ -7,20 +7,15 @@ import Applications from '../pages/applications';
 function Navigation(){
     return (
         <BrowserRouter>
-        <title>Edmund Chi Hong Chan</title>
-            <header className='navigation-bar'>
-                <p>Edmund Chi Hong Chan</p>
-                <p>Web Application Developer</p>
-            </header>
-            <nav>
-                <NavLink to="">Home</NavLink>
-                <NavLink to="apps">Applications</NavLink>
-                <NavLink to="blog">Blog</NavLink>
+            <nav className="top-nav">
+                <NavLink to="" className="nav-spacing">Home</NavLink>
+                <NavLink to="apps" className="nav-spacing">Applications</NavLink>
+                <NavLink to="blog" className="nav-spacing">Blog</NavLink>
             </nav>
-            <Routes>
+            <Routes>    
                 <Route path="" element={<Index />} />
-                <Route path="apps" element={<Applications />} />
-                <Route path="blog" element={<BlogPage />} />
+                <Route path="/apps/*" element={<Applications />} />
+                <Route path="/blog" element={<BlogPage />} />
             </Routes>
         </BrowserRouter>
     )

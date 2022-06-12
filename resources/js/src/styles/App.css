@@ -7,8 +7,23 @@
   text-align: center;
 }
 
-/* NAVIGATION */
-
-.navigation-bar{
+/* HEADING */
+.heading{
   display: inline-block;
+}
+
+/* NAVIGATION */
+.nav-spacing {
+  margin: 10px 5px;
+  text-decoration: none;
+}
+
+.top-nav{
+  margin-left: 50%;
+}
+
+/* APPLICATIONS */
+
+.center-links{
+  text-decoration: none;
 }
