@@ -5376,7 +5376,6 @@ function ToDoList() {
       setList(function (prevValue) {
         return [].concat(_toConsumableArray(list), [todo]);
       });
-      console.log(list);
       setTodo('');
     }
   }
@@ -5398,6 +5397,12 @@ function ToDoList() {
         value: "Add To Do",
         onClick: handleSubmit
       })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
+      children: list.map(function (item, index) {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
+          children: item
+        }, index);
+      })
     })]
   });
 }

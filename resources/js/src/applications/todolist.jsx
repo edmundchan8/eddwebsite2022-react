@@ -15,7 +15,6 @@ function ToDoList(){
             setList(prevValue => {
                 return( [...list, todo])
             })
-            console.log(list);
             setTodo('');
         }
     }
@@ -28,6 +27,9 @@ function ToDoList(){
                 <input type="text" name="value" value={todo} onChange={handleChange}/>
                 <input type="submit" name="submit" value="Add To Do" onClick={handleSubmit}/>
             </label>
+            <ul>
+                {list.map((item, index) => {return<li key={index}>{item}</li>})}
+            </ul>
         </div>
     )
 }
