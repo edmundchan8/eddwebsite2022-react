@@ -1,9 +1,12 @@
-import { set } from 'lodash';
 import React, { useState } from 'react'
+import List from './list'
 
 function ToDoList(){
     const [todo, setTodo] = useState("");
     const [list, setList] = useState([]);
+
+    // styling
+    
 
     function handleChange(event){
         setTodo(event.target.value);
@@ -19,16 +22,21 @@ function ToDoList(){
         }
     }
 
+    function handleDelete(id){
+        setList(list.filter((item, index) => {
+            return index !== id
+        }))
+    }
+
     return(
         <div>
-            <h1>To Do List</h1>
             <label>
                 <h4>Enter your To Do</h4>
                 <input type="text" name="value" value={todo} onChange={handleChange}/>
                 <input type="submit" name="submit" value="Add To Do" onClick={handleSubmit}/>
             </label>
             <ul>
-                {list.map((item, index) => {return<li key={index}>{item}</li>})}
+                <List list={list} clickDelete={handleDelete} />
             </ul>
         </div>
     )
