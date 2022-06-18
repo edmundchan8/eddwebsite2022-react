@@ -5348,6 +5348,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 function List(props) {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
       _useState2 = _slicedToArray(_useState, 2),
@@ -5361,17 +5362,29 @@ function List(props) {
     console.log(strike);
   }
 
+  function handleDelete(delFunc, index) {
+    handleStrike(index);
+    delFunc(index);
+  }
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
     children: props.list.map(function (item, index) {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
-        style: {
-          textDecoration: strike[index] ? 'line-through' : 'none'
-        },
-        onClick: function onClick() {
-          handleStrike(index);
-        },
-        children: item
-      }, index);
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
+          style: {
+            textDecoration: strike[index] ? 'line-through' : 'none'
+          },
+          onClick: function onClick() {
+            handleStrike(index);
+          },
+          children: item
+        }, index), strike[index] ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+          onClick: function onClick() {
+            handleDelete(props.clickDelete, index);
+          },
+          children: "Delete"
+        }) : '']
+      });
     })
   });
 }

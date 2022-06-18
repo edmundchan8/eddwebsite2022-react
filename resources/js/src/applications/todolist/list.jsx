@@ -12,14 +12,23 @@ function List(props){
         console.log(strike);
     }
 
+    function handleDelete(delFunc, index){
+        handleStrike(index);
+        delFunc(index);
+    }
+
     return(
         <div>
             {props.list.map((item, index) => {
-                return <li 
-                    key={index} 
-                    style={{textDecoration: strike[index] ? 'line-through' : 'none'}}
-                    onClick={() => {handleStrike(index)} 
-                    }>{item}</li>
+                return <div>
+                        <li 
+                        key={index} 
+                        style={{textDecoration: strike[index] ? 'line-through' : 'none'}}
+                        onClick={() => {handleStrike(index)} 
+                        }>{item}</li>
+                        
+                        {strike[index] ? <button onClick={() => {handleDelete(props.clickDelete, index)}}>Delete</button> : ''}
+                    </div>
                 })}
         </div>
     );
