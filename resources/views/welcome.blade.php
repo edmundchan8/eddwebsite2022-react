@@ -8,6 +8,7 @@
 </head>
 <body>
     <div id="root"></div>
-    <script defer src="{{ asset('js/app.js') }}"></script>
+    {{-- points to app.js in your public folder --}}
+    <script defer src="{{ mix('js/app.js') }}"></script>
 </body>
 </html>
