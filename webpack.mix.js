@@ -11,6 +11,7 @@ const mix = require('laravel-mix');
  |
  */
 
+ // points to app.jsx in the react-app (located within resources)
 mix.js('resources/js/src/components/app.jsx', 'public/js')
     .react()
     .sass('resources/sass/app.scss', 'public/css');

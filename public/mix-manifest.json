@@ -4,5 +4,7 @@
     "/favicon.ico": "/favicon.ico",
     "/index.php": "/index.php",
     "/mix-manifest.json": "/mix-manifest.json",
-    "/robots.txt": "/robots.txt"
+    "/robots.txt": "/robots.txt",
+    "/images/img.jpg": "/images/img.jpg",
+    "/images/profilePic.jpeg": "/images/profilePic.jpeg"
 }
