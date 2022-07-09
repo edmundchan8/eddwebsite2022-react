@@ -9,6 +9,6 @@
 <body>
     <div id="root"></div>
     {{-- points to app.js in your public folder --}}
-    <script defer src="{{ mix('js/app.js') }}"></script>
+    <script defer src="{{ mix('js/index.js') }}"></script>
 </body>
 </html>

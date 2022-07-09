@@ -1,10 +1,11 @@
 {
-    "/js/app.js": "/js/app.js",
+    "/js/index.js": "/js/index.js",
     "/css/app.css": "/css/app.css",
     "/favicon.ico": "/favicon.ico",
-    "/index.php": "/index.php",
-    "/mix-manifest.json": "/mix-manifest.json",
-    "/robots.txt": "/robots.txt",
     "/images/img.jpg": "/images/img.jpg",
-    "/images/profilePic.jpeg": "/images/profilePic.jpeg"
+    "/images/profilePic.jpeg": "/images/profilePic.jpeg",
+    "/index.php": "/index.php",
+    "/js/app.js": "/js/app.js",
+    "/mix-manifest.json": "/mix-manifest.json",
+    "/robots.txt": "/robots.txt"
 }

@@ -1,14 +1,19 @@
 import * as React from 'react'
-import AboutPage from './about';
-import Heading from './heading';
+import ReactDOM from 'react-dom'
+import Home from './home'
+import App from './app';
+import { BrowserRouter } from 'react-router-dom';
 
 function Index() {
   return (
-    <div>
-      <Heading />
-      <AboutPage />
-    </div>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   );
 }
 
 export default Index
+
+if (document.getElementById('root')) {
+  ReactDOM.render(<Index />, document.getElementById('root'));
+}

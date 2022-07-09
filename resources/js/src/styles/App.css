@@ -27,3 +27,21 @@
 .center-links{
   text-decoration: none;
 }
+
+/* LANGUAGES BUTTONS */
+
+.language-buttons a{
+  font-weight: bold;
+  text-decoration: none;
+  padding: 10px;
+  margin: 20px 40px;
+}
+
+.languages-list {
+  display: inline-block;
+  padding: 20px;
+}
+
+.hide-list{
+  visibility: hidden;
+}
