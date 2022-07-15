@@ -39,9 +39,6 @@ function Languages(){
                 {projects.map((project, index) =>
                     project[0] == programmingLanguage ? <li key={index} className="languages-list">{project[1]}</li> : ""    
                 )}
-                    {/* <li key={index}>{filteredLanguage.name}</li> */}
-                    {/* )
-                )))} */}
             </ul>
             <div>
                 <a href="#" onMouseOver={underline} name="c#" >C#</a>
