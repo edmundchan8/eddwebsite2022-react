@@ -49,7 +49,7 @@ function Applications() {
   console.log(showApp);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
     children: [showApp == '/apps' ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h1", {
-      children: "Applications"
+      children: "Applicationss"
     }) : null, showApp == '/apps/todolist' ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h1", {
       children: "To Do List"
     }) : null, showApp == '/apps/stockmanager' ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h1", {
@@ -156,7 +156,7 @@ function Index() {
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h1", {
-      children: "Welcome to the Stockmanager page!"
+      children: "Welcome to the new Stockmanager page!"
     })
   });
 }
