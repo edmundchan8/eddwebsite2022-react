@@ -26,6 +26,7 @@
 
 .center-links{
   text-decoration: none;
+  padding: 0px 25px;
 }
 
 /* LANGUAGES BUTTONS */
@@ -35,6 +36,7 @@
   text-decoration: none;
   padding: 10px;
   margin: 20px 40px;
+  width: 100px;
 }
 
 .languages-list {
@@ -45,3 +47,4 @@
 .hide-list{
   visibility: hidden;
 }
+
