@@ -8,7 +8,8 @@ function ToDoList(){
     const [updated, setUpdated] = useState(true);
 
     const api = axios.create({
-        baseURL: process.env.APP_URL || 'http://127.0.0.1:8000'
+        baseURL: ''
+        //baseURL: process.env.APP_URL || 'http://127.0.0.1:8000'
     })
 
     //function to call api with an async() method
