@@ -10,7 +10,7 @@ function Applications() {
       setShowApp(location.pathname);
   }, [location.key]);
 
-  console.log(showApp);
+  // console.log(showApp);
 
   return( 
     <div>
