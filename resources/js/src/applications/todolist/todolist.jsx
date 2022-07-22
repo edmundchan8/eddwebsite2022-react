@@ -8,13 +8,13 @@ function ToDoList(){
     const [updated, setUpdated] = useState(true);
 
     const api = axios.create({
-        baseURL: 'http://127.0.0.1:8000/api'
+        baseURL: process.env.APP_URL || 'http://127.0.0.1:8000'
     })
 
     //function to call api with an async() method
     const getList = async() => {
         //get api, to get all lists with axios.  When getting the api, .then check the response
-        await api.get('/todolist').then(res=>{
+        await api.get('/api/todolist').then(res=>{
             //if response is good (200), get data in the response
             if(res.status==200){
                 //set response.data to dataArr
@@ -34,12 +34,12 @@ function ToDoList(){
     };
 
     const addTodo = async() => {
-        let res = await api.post('/todolist/add' , { value: todo });
+        let res = await api.post('/api/todolist/add' , { value: todo });
         setUpdated(true);
     }
 
     const removeTodo = async(id) => {
-        let res = await api.delete(`todolist/remove?id=${id}`);
+        let res = await api.delete(`/api/todolist/remove?id=${id}`);
         setUpdated(true);
         
     }
