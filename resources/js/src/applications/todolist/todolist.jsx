@@ -73,7 +73,7 @@ function ToDoList(){
     return(
         <div>
             <label>
-                <h4>Enter your To Do Below</h4>
+                <h4>Enter your To Do</h4>
                 <input type="text" name="value" value={todo} onChange={handleChange}/>
                 <input type="submit" name="submit" value="Add To Do" onClick={handleSubmit}/>
             </label>
