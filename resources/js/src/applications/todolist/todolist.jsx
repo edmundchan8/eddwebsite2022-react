@@ -6,6 +6,7 @@ function ToDoList(){
     const [todo, setTodo] = useState("");
     const [list, setList] = useState([]);
     const [updated, setUpdated] = useState(true);
+    const [currentTime, setCurrentTime] = useState("");
 
     const api = axios.create({
         baseURL: ''
@@ -35,14 +36,25 @@ function ToDoList(){
     };
 
     const addTodo = async() => {
-        let res = await api.post('/api/todolist/add' , { value: todo });
-        setUpdated(true);
+        await api.post('/api/todolist/add' , { value: todo }).then(res => {
+            if(res.status == 201){
+                setUpdated(true);
+            }
+        }).catch(err=>{
+            console.log(err);
+        });
+
     }
 
     const removeTodo = async(id) => {
-        let res = await api.delete(`/api/todolist/remove?id=${id}`);
-        setUpdated(true);
-        
+        await api.delete(`/api/todolist/remove?id=${id}`).then(res => {
+            console.log(res.status)
+            if(res.status == 200){
+                setUpdated(true);
+            }
+        }).catch(err => {
+            console.log(err);
+        });
     }
 
     useEffect( () => {
@@ -70,16 +82,25 @@ function ToDoList(){
         removeTodo(id);
     }
 
+    function getCurrentTime(){
+        var current = newDate();
+        alert(current);
+    }
+
     return(
         <div>
-            <label>
-                <h4>Enter your To Do</h4>
-                <input type="text" name="value" value={todo} onChange={handleChange}/>
-                <input type="submit" name="submit" value="Add To Do" onClick={handleSubmit}/>
-            </label>
-            <ul>
-                <List list={list} clickDelete={handleDelete} />
-            </ul>
+            <form onSubmit={handleSubmit}>
+                    <h4>Enter your To Do</h4>
+                    <textarea className="textarea-size button-display"
+                        name="value" 
+                        value={todo} 
+                        onChange={handleChange}
+                    />
+                    <input type="submit" name="submit" value="Add To Do"/>
+                <ul>
+                    <List list={list} clickDelete={handleDelete} />
+                </ul>
+            </form>
         </div>
     )
 }

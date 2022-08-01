@@ -1,60 +1,71 @@
 import React, {useState} from 'react'
+import axios from"axios";
+import { useNavigate} from "react-router-dom";
+import Index from './index';
 
-async function Login(){
+function Login(){
 
-    // // useState variables for registering account
-    // const [newName, setNewName] = useState("");
-    // const [newEmail, setNewEmail] = useState("");
-    // const [newPassword, setNewPassword] = useState("");
+    // useState variables for logging in 
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     
-    // // useState variables for logging in 
-    // const [email, setEmail] = useState("");
-    // const [password, setPassword] = useState("");
-    
-    // let registerObj = {newName, newEmail, newPassword};
-    
-    // let result = await fetch("http://127.0.0.1:8000/api/register", {
-    //     method:'POST',
-    //     body: JSON.stringify(registerObj),
-    //     headers:{
-    //         "Content-Type":"application/json",
-    //         "Accept": "application/json"
-    //     }
-    // });
+    const api = axios.create({
+        baseURL: ''
+    })
 
-    // result = await result.json();
+    const sendLogin = async(loginObj) => {
+        await api.post('/api/login', loginObj)
+            .then( res => {
+                console.log(res.status);
+                if(res.status == 201){
+                    alert('Login successful');
+                    useNavigate(<Index/>);
+                }
+                else{
+                    alert('registration failed');
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
+
+    function handleLogin(event){
+        event.preventDefault();
+        const loginObj = {email: email, password: password};
+        sendLogin(loginObj);
+    }
+
+    function handleChange(event){
+        const { value, name } = event.target;
+        if(name === "email"){
+            setName(value);
+        }
+        if(name === "password"){
+            setPassword(value);
+        }
+    }
 
     return(
         <div>
-            <h1>Register</h1>
-            {/* <h3>Enter in your login details</h3>
-            <label>
-                <p>Name</p>
-                <input type="text" name="newName" onChange={(e) => setNewName(e.target.value)} value={newName} />
-            </label>
-            <label>
-                <p>Email</p>
-                <input type="text" name="newEmail" onChange={(e) => setNewEmail(e.target.value)} value={newEmail} />
-            </label>
-            <label>
-                <p>Password</p>
-                <input type="password" name="newPassword" onChange={(e) => setNewPassword(e.target.value)} value={newPassword} />
-            </label>
-            <button>Register</button>
-            
+            <form onSubmit={handleLogin}>        
             <h1>Login</h1>
             <h3>Enter in your login details</h3>
             <label>
                 <p>Email</p>
-                <input type="text" name="email" onChange={(e) => setEmail(e.target.value)} value={email} />
+                <input type="text" name="email" onChange={handleChange} value={email} />
             </label>
             <label>
                 <p>Password</p>
-                <input type="text" name="password" onChange={(e) => setPassword(e.target.value)} value={password} />
+                <input type="password" name="password" onChange={handleChange} value={password} />
             </label>
-            <button>Login</button> */}
+            <label><p></p>
+            <input type="submit" value="Login" />
+            </label>
+            </form>
+
         </div>
     );
 }
 
-export default Login
+export default Register

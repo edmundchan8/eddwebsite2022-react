@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react'
-import Login from './stockmanager/login'
 import { NavLink, useLocation} from "react-router-dom";
 
 function Applications() {

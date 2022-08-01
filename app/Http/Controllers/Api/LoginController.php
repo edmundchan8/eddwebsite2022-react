@@ -6,19 +6,33 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Validation\Rules\Password;
+use DB;
+
 
 class LoginController extends Controller
 {
 
+    public function index(){
+        $users = DB::select('select * from users');
+        return $users;
+    }
     //register new users
     public function register(Request $request){
         $user = new User;
+        $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|email',
+            'password' => 'required', 'confirmed', Password::min(8)
+        ]);
+
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = \Hash::make($request->password);
         $user->save();
-        return $user;
+        return $user;   
     }
+
 
     // Authenticate users
     public function authenticate(Request $request){

@@ -18,10 +18,13 @@ function List(props){
     return(
         <div>
             {props.list.map((item) => {
+                const backgroundColor = item[0]%2 === 0 ? {'background':'#DDEED3'} : {'background':''};
+                const strikeStyle = {textDecoration: strike[item[0]] ? 'line-through' : 'none'};
+
                 return <div key={item[0]}>
                         <li 
-                        key={item[0]} 
-                        style={{textDecoration: strike[item[0]] ? 'line-through' : 'none'}}
+                        key={item[0]}
+                        style={{...backgroundColor, ...strikeStyle}}
                         onClick={() => {handleStrike(item[0])} 
                         }>{item[1]}</li>
                         
