@@ -2246,7 +2246,7 @@ function List(props) {
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
     children: props.list.map(function (item, key) {
-      console.log(key);
+      console.log(item);
       var backgroundColor = key % 2 === 0 ? {
         'background': '#DDEED3'
       } : {
@@ -2256,13 +2256,18 @@ function List(props) {
         textDecoration: strike[item[0]] ? 'line-through' : 'none'
       };
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("small", {
+          className: "date-stamp",
+          children: item[2]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
           style: _objectSpread(_objectSpread({}, backgroundColor), strikeStyle),
           onClick: function onClick() {
             handleStrike(item[0]);
           },
           children: item[1]
-        }, item[0]), strike[item[0]] ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+        }, item[0]), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+          className: "small-border"
+        }), strike[item[0]] ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
           onClick: function onClick() {
             handleDelete(props.clickDelete, item[0]);
           },
@@ -2369,7 +2374,7 @@ function ToDoList() {
                   dataArr.forEach(function (element) {
                     //each list item is element.list
                     setList(function (prevValue) {
-                      return [].concat(_toConsumableArray(prevValue), [[element.id, element.list]]);
+                      return [].concat(_toConsumableArray(prevValue), [[element.id, element.list, element.created_at]]);
                     });
                   });
                 }
@@ -2398,7 +2403,7 @@ function ToDoList() {
             case 0:
               _context2.next = 2;
               return api.post('/api/todolist/add', {
-                value: todo
+                value: [todo]
               }).then(function (res) {
                 if (res.status == 201) {
                   setUpdated(true);
@@ -2428,8 +2433,6 @@ function ToDoList() {
             case 0:
               _context3.next = 2;
               return api["delete"]("/api/todolist/remove?id=".concat(id)).then(function (res) {
-                console.log(res.status);
-
                 if (res.status == 200) {
                   setUpdated(true);
                 }
@@ -2473,11 +2476,6 @@ function ToDoList() {
 
   function handleDelete(id) {
     removeTodo(id);
-  }
-
-  function getCurrentTime() {
-    var current = newDate();
-    alert(current);
   }
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
@@ -3734,7 +3732,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".app {\r\n    /* margin: 1rem; */\r\n    font-family: Arial, Helvetica, sans-serif;\r\n    margin: 1rem 5rem;\r\n  }\r\n\r\n.align-middle{\r\n  text-align: center;\r\n}\r\n\r\n/* HEADING */\r\n.heading{\r\n  display: inline-block;\r\n}\r\n\r\n/* NAVIGATION */\r\n.nav-spacing {\r\n  margin: 10px 5px;\r\n  text-decoration: none;\r\n}\r\n\r\n.top-nav{\r\n  margin-left: 50%;\r\n}\r\n\r\n/* APPLICATIONS */\r\n\r\n.center-links{\r\n  text-decoration: none;\r\n  padding: 0px 25px;\r\n}\r\n\r\n/* LANGUAGES BUTTONS */\r\n\r\n.language-buttons a{\r\n  font-weight: bold;\r\n  text-decoration: none;\r\n  padding: 10px;\r\n  margin: 20px 40px;\r\n  width: 100px;\r\n}\r\n\r\n.languages-list {\r\n  display: inline-block;\r\n  padding: 20px;\r\n}\r\n\r\n.hide-list{\r\n  visibility: hidden;\r\n}\r\n\r\n/*  SIZE OF INPUT TEXT AREA  */\r\n\r\n.textarea-size{\r\n  width: 45%;\r\n  height: 50px;\r\n  margin:auto;\r\n}\r\n\r\n.button-display{\r\n  display: block;\r\n}\r\n\r\n/* LIST STYLING */\r\nli {\r\n  padding: 20px 0;\r\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".app {\r\n    /* margin: 1rem; */\r\n    font-family: Arial, Helvetica, sans-serif;\r\n    margin: 1rem 5rem;\r\n  }\r\n\r\n.align-middle{\r\n  text-align: center;\r\n}\r\n\r\n/* HEADING */\r\n.heading{\r\n  display: inline-block;\r\n}\r\n\r\n/* NAVIGATION */\r\n.nav-spacing {\r\n  margin: 10px 5px;\r\n  text-decoration: none;\r\n}\r\n\r\n.top-nav{\r\n  margin-left: 50%;\r\n}\r\n\r\n/* APPLICATIONS */\r\n\r\n.center-links{\r\n  text-decoration: none;\r\n  padding: 0px 25px;\r\n}\r\n\r\n/* LANGUAGES BUTTONS */\r\n\r\n.language-buttons a{\r\n  font-weight: bold;\r\n  text-decoration: none;\r\n  padding: 10px;\r\n  margin: 20px 40px;\r\n  width: 100px;\r\n}\r\n\r\n.languages-list {\r\n  display: inline-block;\r\n  padding: 20px;\r\n}\r\n\r\n.hide-list{\r\n  visibility: hidden;\r\n}\r\n\r\n/*  SIZE OF INPUT TEXT AREA  */\r\n\r\n.textarea-size{\r\n  width: 45%;\r\n  height: 50px;\r\n  margin:auto;\r\n}\r\n\r\n.button-display{\r\n  display: block;\r\n}\r\n\r\n/* LIST STYLING */\r\nli {\r\n  display: block;\r\n  text-align: left;\r\n  padding: 30px 0px;\r\n  margin: 5px 10px 0px 10px;\r\n  \r\n}\r\n\r\n.date-stamp{\r\n  display: block;\r\n  text-align: right;\r\n  font-style: italic;\r\n}\r\n\r\n.small-border{\r\n  margin: auto;\r\n  width: 50%;\r\n  border-top: 1px solid black;\r\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

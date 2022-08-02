@@ -63,5 +63,21 @@
 
 /* LIST STYLING */
 li {
-  padding: 20px 0;
+  display: block;
+  text-align: left;
+  padding: 30px 0px;
+  margin: 5px 10px 0px 10px;
+  
+}
+
+.date-stamp{
+  display: block;
+  text-align: right;
+  font-style: italic;
+}
+
+.small-border{
+  margin: auto;
+  width: 50%;
+  border-top: 1px solid black;
 }

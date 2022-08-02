@@ -26,7 +26,7 @@ function ToDoList(){
                 dataArr.forEach(element => {
                     //each list item is element.list
                     setList(prevValue => {
-                        return( [...prevValue, [element.id, element.list]]);
+                        return( [...prevValue, [element.id, element.list, element.created_at]]);
                     })
                 });
             }
@@ -36,7 +36,7 @@ function ToDoList(){
     };
 
     const addTodo = async() => {
-        await api.post('/api/todolist/add' , { value: todo }).then(res => {
+        await api.post('/api/todolist/add' , { value: [todo] }).then(res => {
             if(res.status == 201){
                 setUpdated(true);
             }
@@ -48,7 +48,6 @@ function ToDoList(){
 
     const removeTodo = async(id) => {
         await api.delete(`/api/todolist/remove?id=${id}`).then(res => {
-            console.log(res.status)
             if(res.status == 200){
                 setUpdated(true);
             }
@@ -80,11 +79,6 @@ function ToDoList(){
 
     function handleDelete(id){
         removeTodo(id);
-    }
-
-    function getCurrentTime(){
-        var current = newDate();
-        alert(current);
     }
 
     return(
