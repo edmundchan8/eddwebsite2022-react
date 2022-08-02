@@ -2245,8 +2245,9 @@ function List(props) {
   }
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-    children: props.list.map(function (item) {
-      var backgroundColor = item[0] % 2 === 0 ? {
+    children: props.list.map(function (item, key) {
+      console.log(key);
+      var backgroundColor = key % 2 === 0 ? {
         'background': '#DDEED3'
       } : {
         'background': ''

@@ -17,8 +17,9 @@ function List(props){
 
     return(
         <div>
-            {props.list.map((item) => {
-                const backgroundColor = item[0]%2 === 0 ? {'background':'#DDEED3'} : {'background':''};
+            {props.list.map((item, key) => {
+                console.log(key);
+                const backgroundColor = key%2 === 0 ? {'background':'#DDEED3'} : {'background':''};
                 const strikeStyle = {textDecoration: strike[item[0]] ? 'line-through' : 'none'};
 
                 return <div key={item[0]}>
