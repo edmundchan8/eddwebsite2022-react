@@ -36,7 +36,7 @@ function ToDoList(){
     };
 
     const addTodo = async() => {
-        await api.post('/api/todolist/add' , { value: [todo] }).then(res => {
+        await api.post('/api/todolist/add' , { value: todo }).then(res => {
             if(res.status == 201){
                 setUpdated(true);
             }
@@ -91,7 +91,7 @@ function ToDoList(){
                         onChange={handleChange}
                     />
                     <input type="submit" name="submit" value="Add To Do"/>
-                <ul>
+                <ul className="ul-list">
                     <List list={list} clickDelete={handleDelete} />
                 </ul>
             </form>
