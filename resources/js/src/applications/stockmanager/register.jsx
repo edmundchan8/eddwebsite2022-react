@@ -4,12 +4,13 @@ import { useNavigate} from "react-router-dom"
 import Login from './login';
 
 function Register(){
-
+    console.log('test');
     // useState variables for registering account
     const [newName, setNewName] = useState("");
     const [newEmail, setNewEmail] = useState("");
     const [newPassword, setNewPassword] = useState("");
-    
+    const [confirmPassword, setConfirmPassword] = useState("");
+
     const api = axios.create({
         baseURL: ''
     })
@@ -33,6 +34,10 @@ function Register(){
 
     function handleRegister(event){
         event.preventDefault();
+        if (newPassword != confirmPassword){
+            alert("Passwords do not match, please try again");
+            return;
+        }
         const registerObj = {name: newName,email: newEmail,password: newPassword};
         sendRegister(registerObj);
     }
@@ -49,13 +54,16 @@ function Register(){
         if(name === "newPassword"){
             setNewPassword(value);
         }
+        if(name === "confirmPassword"){
+            setConfirmPassword(value);
+        }
     }
 
     return(
         <div>
             <form onSubmit={handleRegister}>
                 <h1>Register</h1>
-                <h3>Enter in your login details</h3>
+                <h3>Enter in your    details</h3>
                 <label>
                     <p>Name</p>
                     <input type="text" name="newName" onChange={handleChange} value={newName} />
@@ -67,6 +75,10 @@ function Register(){
                 <label>
                     <p>Password</p>
                     <input type="password" name="newPassword" onChange={handleChange} value={newPassword} />
+                </label>
+                <label>
+                    <p>Confirm Password</p>
+                    <input type="password" name="confirmPassword" onChange={handleChange} value={confirmPassword} />
                 </label>
                 <label><p></p>
                 <input type="submit" value="Register" />

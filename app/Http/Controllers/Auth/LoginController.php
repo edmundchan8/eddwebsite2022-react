@@ -11,28 +11,7 @@ use DB;
 
 
 class LoginController extends Controller
-{
-
-    public function index(){
-        $users = DB::select('select * from users');
-        return $users;
-    }
-    //register new users
-    public function register(Request $request){
-        $user = new User;
-        $request->validate([
-            'name' => 'required|max:255',
-            'email' => 'required|email',
-            'password' => 'required', 'confirmed', Password::min(8)
-        ]);
-
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = \Hash::make($request->password);
-        $user->save();
-        return $user;   
-    }
-
+{   
 
     // Authenticate users
     public function authenticate(Request $request){
@@ -67,6 +46,6 @@ class LoginController extends Controller
 
 
     public function login(Request $request){
-        //test
+        return 'test';
     }
 }

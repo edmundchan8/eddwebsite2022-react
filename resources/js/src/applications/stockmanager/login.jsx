@@ -1,10 +1,9 @@
 import React, {useState} from 'react'
 import axios from"axios";
-import { useNavigate} from "react-router-dom";
+import { NavLink, useNavigate} from "react-router-dom";
 import Index from './index';
 
 function Login(){
-
     // useState variables for logging in 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -14,19 +13,19 @@ function Login(){
     })
 
     const sendLogin = async(loginObj) => {
-        await api.post('/api/login', loginObj)
+        await api.post('/api/index', loginObj)
             .then( res => {
                 console.log(res.status);
-                if(res.status == 201){
+                if(res.status == 201){  
                     alert('Login successful');
                     useNavigate(<Index/>);
                 }
                 else{
-                    alert('registration failed');
+                    alert('Login failed');
                 }
             })
             .catch(error => {
-                console.log(error);
+                console.log(error + " unable to login, 401 means login wrong?");
             })
     }
 
@@ -39,7 +38,7 @@ function Login(){
     function handleChange(event){
         const { value, name } = event.target;
         if(name === "email"){
-            setName(value);
+            setEmail(value);
         }
         if(name === "password"){
             setPassword(value);
@@ -48,8 +47,7 @@ function Login(){
 
     return(
         <div>
-            <form onSubmit={handleLogin}>        
-            <h1>Login</h1>
+            <form onSubmit={handleLogin}>
             <h3>Enter in your login details</h3>
             <label>
                 <p>Email</p>
@@ -63,9 +61,9 @@ function Login(){
             <input type="submit" value="Login" />
             </label>
             </form>
-
-        </div>
+            <NavLink className="center-links" to="/apps/register">Register a new account</NavLink>
+            </div>
     );
 }
 
-export default Register
+export default Login

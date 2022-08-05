@@ -1,7 +1,8 @@
 import React from 'react'
 import Applications from './applications';
 import ToDoList from './todolist/todolist';
-import StockManager from './stockmanager/index';
+import StockManagerLogin from './stockmanager/login';
+import StockManagerRegister from './stockmanager/register';
 import { Routes, Route } from "react-router-dom";
 
 function ApplicationIndex(){
@@ -11,7 +12,8 @@ function ApplicationIndex(){
             <Applications/>
             <Routes>
                 <Route path="/todolist" element={<ToDoList />} />
-                <Route path="/stockmanager" element={<StockManager />} />
+                <Route path="/login" element={<StockManagerLogin />} />
+                <Route path="/register" element={<StockManagerRegister />} />
             </Routes>
         </div>
     );
