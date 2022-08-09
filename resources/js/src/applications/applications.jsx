@@ -15,10 +15,10 @@ function Applications() {
     <div>
       {showApp == '/apps' ? <h1>Applications</h1> : null}
       {showApp == '/apps/todolist' ? <h1>To Do List</h1> : null}
-      {showApp == '/apps/login' ? <h1>Login</h1> : null}
-      {showApp == '/apps/stockmanager' ? <h1>Stock Manager</h1> : null}
+      {showApp == '/apps/stockmanager/login' ? <h1>Login</h1> : null}
+      {showApp == '/apps/stockmanager/index' ? <h1>Stock Manager</h1> : null}
       <NavLink className="center-links" to="todolist">To Do List</NavLink>
-      <NavLink className="center-links" to="login">Stock Manager</NavLink>
+      <NavLink className="center-links" to="stockmanager/index">Stock Manager</NavLink>
     </div>
   );
 }

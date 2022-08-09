@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Auth;
 
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\User;
-use Illuminate\Validation\Rules\Password;
 use DB;
 
 
@@ -21,6 +19,7 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
 
+        // $credentials = $request->only('email', 'password');
         
         // if the credentials email and password are correctly provided 
         // attempt method accepts array of key/value pairs
@@ -29,23 +28,23 @@ class LoginController extends Controller
         if(Auth::attempt($credentials)){
             // regenerate the requeste session
             $request->session()->regenerate();
-            $user = Auth::user();
-            return response()->json($user);
+            
+            //create a sanctum token called auth_token
+            $token = $request->user()->createToken('auth_token')->plainTextToken;
 
-            // return user to 'welcome'
-            //return redirect()->intended('welcome');
-   
+            return response()->json([
+                'access_token' => $token,
+                'token-type' => 'Bearer'
+            ]);
         }
 
         // else, if credentials fails, we return an error
         return back()->withErrors([
-            
-            'email' => 'The proviided credentials do not match our records.',
+            'email' => 'The provided credentials do not match our records.',
         ])->onlyInput('email');
     }
 
-
-    public function login(Request $request){
-        return 'test';
+    public function removeToken(){
+        return "removing token";
     }
 }

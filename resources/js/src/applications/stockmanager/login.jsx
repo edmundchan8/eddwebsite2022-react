@@ -1,31 +1,36 @@
 import React, {useState} from 'react'
 import axios from"axios";
-import { NavLink, useNavigate} from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Index from './index';
 
 function Login(){
+    const navigate = useNavigate();
     // useState variables for logging in 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    
+    const [errors, setErrors] = useState('');
+
     const api = axios.create({
         baseURL: ''
     })
 
     const sendLogin = async(loginObj) => {
-        await api.post('/api/index', loginObj)
+        console.log(loginObj);
+        await api.post('/auth/authenticate', loginObj)
             .then( res => {
                 console.log(res.status);
-                if(res.status == 201){  
-                    alert('Login successful');
-                    useNavigate(<Index/>);
-                }
-                else{
-                    alert('Login failed');
+                if(res.status == 200){
+                    navigate("/apps/stockmanager/index");
                 }
             })
             .catch(error => {
-                console.log(error + " unable to login, 401 means login wrong?");
+                console.log(error.response.status + 'heki');
+                if(error.response.status == 422){
+                    setErrors("Email and or password not entered? \n" + error.response.status);
+                }
+                if(error.response.status == 500){
+                    setErrors("User account might not exist: \n" + error.response.status);
+                }
             })
     }
 
@@ -59,9 +64,10 @@ function Login(){
             </label>
             <label><p></p>
             <input type="submit" value="Login" />
+            <p>{errors}</p>
             </label>
             </form>
-            <NavLink className="center-links" to="/apps/register">Register a new account</NavLink>
+            <NavLink className="center-links" to="/apps/stockmanager/register">Register a new account</NavLink>
             </div>
     );
 }

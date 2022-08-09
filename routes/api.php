@@ -25,3 +25,7 @@ Route::delete('/todolist/remove', [TodolistController::class, 'remove']);
 // USERS CONTROLLER
 Route::get('/user/index', [UserController::class, 'index']);
 Route::delete('/user/{id}', [UserController::class, 'delete']);
+
+Route::get('/greetingapi', function () {
+    return 'Hello World';
+});

@@ -13,12 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 
-Route::view('/{path?}', 'welcome')
-     ->where('path', '.*')
-     ->name('react');
-
-     
+// Route::view('/{path?}', 'welcome')
+//      ->where('path', '.*')
+//      ->name('react');

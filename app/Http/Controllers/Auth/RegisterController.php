@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use App\Models\User;
+use Illuminate\Validation\Rules\Password;
 
 class RegisterController extends Controller
 {
@@ -26,8 +30,9 @@ class RegisterController extends Controller
         $token = $user->createToken('auth_token')->plainTextToken;
     
         return response()->json([
+            'user' => $user,
             'access_token' => $token,
-            'token_type' => 'Bearer',
+            'token_type' => 'Bearer'
         ]);
 
     }

@@ -1,27 +1,28 @@
 import React, {useState} from 'react'
 import axios from"axios";
-import { useNavigate} from "react-router-dom"
-import Login from './login';
+import { NavLink, useNavigate } from "react-router-dom";
 
 function Register(){
-    console.log('test');
+    // variable navigate to utilize useNavigate hook when redirecting user
+    const navigate = useNavigate();
     // useState variables for registering account
     const [newName, setNewName] = useState("");
     const [newEmail, setNewEmail] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [errors, setErrors] = useState("");
 
     const api = axios.create({
         baseURL: ''
     })
 
     const sendRegister = async(registerObj) => {
-        await api.post('/api/register', registerObj)
+        
+        await api.post('/auth/register', registerObj)
             .then( res => {
                 console.log(res.status);
-                if(res.status == 201){
-                    alert('registration successful');
-                    useNavigate(<Login/>);
+                if(res.status == 200){
+                    navigate("/apps/stockmanager/login");
                 }
                 else{
                     alert('registration failed');
@@ -34,8 +35,27 @@ function Register(){
 
     function handleRegister(event){
         event.preventDefault();
+        if(!newName){
+            setErrors("Please enter a name");
+            return;
+        }
+        if(!newEmail){
+            setErrors(errors + '\n' + "Please enter an email");
+            return;
+        }
+
+        if(!newEmail){
+            setErrors(errors + '\n' + "Please enter an email");
+            return;
+        }
+
+        if(!newPassword || !confirmPassword){
+            setErrors(errors + '\n' + "Please enter both passwords");
+            return;
+        }
+
         if (newPassword != confirmPassword){
-            alert("Passwords do not match, please try again");
+            setErrors(errors + '\n' + "Passwords do not match, please try again");
             return;
         }
         const registerObj = {name: newName,email: newEmail,password: newPassword};
@@ -44,7 +64,7 @@ function Register(){
 
     function handleChange(event){
         const { value, name } = event.target;
-        
+        setErrors('')
         if(name === "newName"){
             setNewName(value);
         }
@@ -83,7 +103,9 @@ function Register(){
                 <label><p></p>
                 <input type="submit" value="Register" />
                 </label>
+                <p>{errors}</p>
             </form>
+            <NavLink className="center-links" to="/apps/stockmanager/login">Return to Login</NavLink>
         </div>
     );
 }
