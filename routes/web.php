@@ -13,10 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-// Route::view('/{path?}', 'welcome')
-//      ->where('path', '.*')
-//      ->name('react');
+// This allows users to refresh the website without it showing a 404
+Route::view('/{path?}', 'welcome')
+     ->where('path', '.*');
+     // ->name('react');

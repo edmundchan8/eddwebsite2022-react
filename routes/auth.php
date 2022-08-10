@@ -16,7 +16,7 @@ use App\Http\Controllers\Auth\RegisterController;
 
 // LOGIN CONTROLLER
 Route::post('/auth/authenticate', [LoginController::class, 'authenticate']);
-Route::middleware('auth:sanctum')->get('/auth/index', [LoginController::class, 'index']);
+// Route::middleware('auth:sanctum')->get('/auth/index', [LoginController::class, 'index']);
 Route::group(['middleware' => ['web']], function () {
     // your routes here
     Route::post('/authenticate', [LoginController::class, 'authenticate']);
