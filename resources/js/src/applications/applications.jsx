@@ -18,7 +18,7 @@ function Applications() {
       {showApp == '/apps/stockmanager/login' ? <h1>Login</h1> : null}
       {showApp == '/apps/stockmanager/index' ? <h1>Stock Manager</h1> : null}
       <NavLink className="center-links" to="todolist">To Do List</NavLink>
-      <NavLink className="center-links" to="stockmanager/index">Stock Manager</NavLink>
+      <NavLink className="center-links" to="stockmanager/login">Stock Manager</NavLink>
     </div>
   );
 }

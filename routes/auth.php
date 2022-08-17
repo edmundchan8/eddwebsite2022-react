@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\StockManagerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,14 +15,3 @@ use App\Http\Controllers\Auth\RegisterController;
 |
 */
 
-// LOGIN CONTROLLER
-Route::post('/auth/authenticate', [LoginController::class, 'authenticate']);
-// Route::middleware('auth:sanctum')->get('/auth/index', [LoginController::class, 'index']);
-Route::group(['middleware' => ['web']], function () {
-    // your routes here
-    Route::post('/authenticate', [LoginController::class, 'authenticate']);
-});
-Route::get('/auth/removeToken', [LoginController::class, 'removeToken']);
-
-// REGISTER CONTROLLER
-Route::post('/auth/register', [RegisterController::class, 'register']);

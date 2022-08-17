@@ -11,27 +11,37 @@ function Login(){
     const [errors, setErrors] = useState('');
 
     const api = axios.create({
-        baseURL: ''
+        baseURL: '',
+        headers: {
+            'Accept': 'application/json',
+        },
+        withCredentials: true,
     })
 
     const sendLogin = async(loginObj) => {
-        console.log(loginObj);
-        await api.post('/auth/authenticate', loginObj)
+        await api.get('/sanctum/csrf-cookie').then(response => {
+            api.post('/api/login', loginObj)
             .then( res => {
                 console.log(res.status);
-                if(res.status == 200){
+                if (res.status == 200){
                     navigate("/apps/stockmanager/index");
                 }
             })
             .catch(error => {
-                console.log(error.response.status + 'heki');
+                console.log(error);
+                if(error.response.status == 401){
+                    setErrors(error.response.data.message);
+                }
                 if(error.response.status == 422){
-                    setErrors("Email and or password not entered? \n" + error.response.status);
+                    setErrors(error.response.data.message);
                 }
                 if(error.response.status == 500){
-                    setErrors("User account might not exist: \n" + error.response.status);
+                    setErrors(error.response.data.message);
+                } else {
+                    console.log(error.response.data.message + " uncaught error");
                 }
             })
+        });
     }
 
     function handleLogin(event){

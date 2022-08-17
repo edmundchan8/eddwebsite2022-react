@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import axios from"axios";
 import { NavLink, useNavigate } from "react-router-dom";
+// import 'public\css\app.css'
 
 function Register(){
     // variable navigate to utilize useNavigate hook when redirecting user
@@ -18,7 +19,7 @@ function Register(){
 
     const sendRegister = async(registerObj) => {
         
-        await api.post('/auth/register', registerObj)
+        await api.post('/api/register', registerObj)
             .then( res => {
                 console.log(res.status);
                 if(res.status == 200){
@@ -83,7 +84,8 @@ function Register(){
         <div>
             <form onSubmit={handleRegister}>
                 <h1>Register</h1>
-                <h3>Enter in your    details</h3>
+                <h3>Enter in your details</h3>
+                <p className="text-warning">{errors}</p>
                 <label>
                     <p>Name</p>
                     <input type="text" name="newName" onChange={handleChange} value={newName} />
@@ -103,7 +105,6 @@ function Register(){
                 <label><p></p>
                 <input type="submit" value="Register" />
                 </label>
-                <p>{errors}</p>
             </form>
             <NavLink className="center-links" to="/apps/stockmanager/login">Return to Login</NavLink>
         </div>

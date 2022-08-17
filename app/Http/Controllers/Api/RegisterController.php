@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Api;
 
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
@@ -13,28 +13,28 @@ class RegisterController extends Controller
 {
     //register new users
     public function register(Request $request){
-        $user = new User;
-        $request->validate([
+        
+        $data = $request->validate([
             'name' => 'required|max:255',
             'email' => 'required|email',
             'password' => 'required', 'confirmed', Password::min(8)
         ]);
 
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = \Hash::make($request->password);
-
-        $user->save();
+        $user = User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => \Hash::make($data['password']),
+        ]);
 
         // create sanctum token
         $token = $user->createToken('auth_token')->plainTextToken;
-    
+        
+        $user->save();
+
         return response()->json([
             'user' => $user,
             'access_token' => $token,
             'token_type' => 'Bearer'
         ]);
-
     }
-
 }

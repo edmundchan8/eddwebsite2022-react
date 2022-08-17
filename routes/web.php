@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,11 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 
-// This allows users to refresh the website without it showing a 404
-Route::view('/{path?}', 'welcome')
-     ->where('path', '.*');
-     // ->name('react');
+
+// this fallback route helps react pages reload!
+Route::fallback(function () {
+     return view('welcome');
+ });

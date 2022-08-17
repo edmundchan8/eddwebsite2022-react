@@ -2113,7 +2113,7 @@ function Applications() {
       children: "To Do List"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.NavLink, {
       className: "center-links",
-      to: "stockmanager/index",
+      to: "stockmanager/login",
       children: "Stock Manager"
     })]
   });
@@ -2271,7 +2271,11 @@ function Login() {
       setErrors = _useState6[1];
 
   var api = axios__WEBPACK_IMPORTED_MODULE_1___default().create({
-    baseURL: ''
+    baseURL: '',
+    headers: {
+      'Accept': 'application/json'
+    },
+    withCredentials: true
   });
 
   var sendLogin = /*#__PURE__*/function () {
@@ -2280,27 +2284,34 @@ function Login() {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              console.log(loginObj);
-              _context.next = 3;
-              return api.post('/auth/authenticate', loginObj).then(function (res) {
-                console.log(res.status);
+              _context.next = 2;
+              return api.get('/sanctum/csrf-cookie').then(function (response) {
+                api.post('/api/login', loginObj).then(function (res) {
+                  console.log(res.status);
 
-                if (res.status == 200) {
-                  navigate("/apps/stockmanager/index");
-                }
-              })["catch"](function (error) {
-                console.log(error.response.status + 'heki');
+                  if (res.status == 200) {
+                    navigate("/apps/stockmanager/index");
+                  }
+                })["catch"](function (error) {
+                  console.log(error);
 
-                if (error.response.status == 422) {
-                  setErrors("Email and or password not entered? \n" + error.response.status);
-                }
+                  if (error.response.status == 401) {
+                    setErrors(error.response.data.message);
+                  }
 
-                if (error.response.status == 500) {
-                  setErrors("User account might not exist: \n" + error.response.status);
-                }
+                  if (error.response.status == 422) {
+                    setErrors(error.response.data.message);
+                  }
+
+                  if (error.response.status == 500) {
+                    setErrors(error.response.data.message);
+                  } else {
+                    console.log(error.response.data.message + " uncaught error");
+                  }
+                });
               });
 
-            case 3:
+            case 2:
             case "end":
               return _context.stop();
           }
@@ -2418,6 +2429,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+ // import 'public\css\app.css'
 
 
 
@@ -2462,7 +2474,7 @@ function Register() {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return api.post('/auth/register', registerObj).then(function (res) {
+              return api.post('/api/register', registerObj).then(function (res) {
                 console.log(res.status);
 
                 if (res.status == 200) {
@@ -2552,7 +2564,10 @@ function Register() {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h1", {
         children: "Register"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
-        children: "Enter in your    details"
+        children: "Enter in your details"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+        className: "text-warning",
+        children: errors
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("label", {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
           children: "Name"
@@ -2594,8 +2609,6 @@ function Register() {
           type: "submit",
           value: "Register"
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
-        children: errors
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.NavLink, {
       className: "center-links",
@@ -4150,7 +4163,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".app {\r\n    /* margin: 1rem; */\r\n    font-family: Arial, Helvetica, sans-serif;\r\n    margin: 1rem 1rem;\r\n  }\r\n\r\n.align-middle{\r\n  text-align: center;\r\n}\r\n\r\n/* HEADING */\r\n.heading{\r\n  display: inline-block;\r\n}\r\n\r\n/* NAVIGATION */\r\n.nav-spacing {\r\n  margin: 10px 5px;\r\n  text-decoration: none;\r\n}\r\n\r\n.top-nav{\r\n  margin-left: 50%;\r\n}\r\n\r\n/* APPLICATIONS */\r\n\r\n.center-links{\r\n  text-decoration: none;\r\n  padding: 0px 25px;\r\n}\r\n\r\n/* LANGUAGES BUTTONS */\r\n\r\n.language-buttons a{\r\n  font-weight: bold;\r\n  text-decoration: none;\r\n  padding: 10px;\r\n  margin: 20px 40px;\r\n  width: 100px;\r\n}\r\n\r\n.languages-list {\r\n  display: inline-block;\r\n  padding: 20px;\r\n}\r\n\r\n.hide-list{\r\n  visibility: hidden;\r\n}\r\n\r\n/*  SIZE OF INPUT TEXT AREA  */\r\n\r\n.textarea-size{\r\n  width: 45%;\r\n  height: 50px;\r\n  margin:auto;\r\n}\r\n\r\n.button-display{\r\n  display: block;\r\n}\r\n\r\n/* LIST STYLING */\r\nli {\r\n  display: block;\r\n  text-align: left;\r\n  padding: 30px 0px;\r\n  margin: 5px 10px 0px 10px;\r\n  \r\n}\r\n\r\n.date-stamp{\r\n  display: block;\r\n  text-align: right;\r\n  font-style: italic;\r\n}\r\n\r\n.small-border{\r\n  margin: auto;\r\n  width: 50%;\r\n  border-top: 1px solid black;\r\n}\r\n\r\n.ul-list{\r\n  padding-left: 0;\r\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".app {\r\n    /* margin: 1rem; */\r\n    font-family: Arial, Helvetica, sans-serif;\r\n    margin: 1rem 1rem;\r\n  }\r\n\r\n.align-middle{\r\n  text-align: center;\r\n}\r\n\r\n/* HEADING */\r\n.heading{\r\n  display: inline-block;\r\n}\r\n\r\n/* NAVIGATION */\r\n.nav-spacing {\r\n  margin: 10px 5px;\r\n  text-decoration: none;\r\n}\r\n\r\n.top-nav{\r\n  margin-left: 50%;\r\n}\r\n\r\n/* APPLICATIONS */\r\n\r\n.center-links{\r\n  text-decoration: none;\r\n  padding: 0px 25px;\r\n}\r\n\r\n/* LANGUAGES BUTTONS */\r\n\r\n.language-buttons a{\r\n  font-weight: bold;\r\n  text-decoration: none;\r\n  padding: 10px;\r\n  margin: 20px 40px;\r\n  width: 100px;\r\n}\r\n\r\n.languages-list {\r\n  display: inline-block;\r\n  padding: 20px;\r\n}\r\n\r\n.hide-list{\r\n  visibility: hidden;\r\n}\r\n\r\n/*  SIZE OF INPUT TEXT AREA  */\r\n\r\n.textarea-size{\r\n  width: 45%;\r\n  height: 50px;\r\n  margin:auto;\r\n}\r\n\r\n.button-display{\r\n  display: block;\r\n}\r\n\r\n/* LIST STYLING */\r\nli {\r\n  display: block;\r\n  text-align: left;\r\n  padding: 30px 0px;\r\n  margin: 5px 10px 0px 10px;\r\n  \r\n}\r\n\r\n.date-stamp{\r\n  display: block;\r\n  text-align: right;\r\n  font-style: italic;\r\n}\r\n\r\n.small-border{\r\n  margin: auto;\r\n  width: 50%;\r\n  border-top: 1px solid black;\r\n}\r\n\r\n.ul-list{\r\n  padding-left: 0;\r\n}\r\n\r\n/*  TEXT STYLING */\r\n\r\n/* warning sign */\r\n.text-warning {\r\n color: red;\r\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

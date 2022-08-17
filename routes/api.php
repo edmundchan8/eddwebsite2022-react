@@ -4,7 +4,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\TodolistController;
-
+use App\Http\Controllers\Api\LoginController;
+use App\Http\Controllers\Api\RegisterController;
+use App\Http\Controllers\Api\StockmanagerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,10 +24,22 @@ Route::get('/todolist', [TodolistController::class, 'index']);
 Route::post('/todolist/add', [TodolistController::class, 'add']);
 Route::delete('/todolist/remove', [TodolistController::class, 'remove']);
 
-// USERS CONTROLLER
-Route::get('/user/index', [UserController::class, 'index']);
-Route::delete('/user/{id}', [UserController::class, 'delete']);
 
-Route::get('/greetingapi', function () {
-    return 'Hello World';
+
+ // LOGIN CONTROLLER
+
+ Route::post('/login', [LoginController::class, 'authenticate']);
+ 
+ Route::group(['middleware' => ['auth:sanctum']], function () {
+    // your routes here
+    // USERS CONTROLLER
+    Route::get('/users', [UserController::class, 'index']);
+    Route::delete('/user/{id}', [UserController::class, 'delete']);
 });
+
+
+// REGISTER CONTROLLER
+Route::post('/register', [RegisterController::class, 'register']);
+
+// STOCKMANAGER CONTROLLER
+// Route::middleware('auth:sanctum')->get('/stockmanager/index', [StockManagerController::class, 'index'])->name('login');
