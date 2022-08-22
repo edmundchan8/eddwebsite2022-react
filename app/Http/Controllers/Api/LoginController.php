@@ -32,11 +32,12 @@ class LoginController extends Controller
             // remove all tokens
             //$user->tokens()->delete();
 
-            $token = $user->createToken('auth_token')->plainTextToken;
-
+            // $token = $user->createToken('auth_token')->plainTextToken;
+            
             $response = [
                 'user' => $user,
-                'token' => $token,
+                // 'access_token' => $token,
+                // 'token_type' => 'Bearer',
             ];
 
             return response($response, 200);

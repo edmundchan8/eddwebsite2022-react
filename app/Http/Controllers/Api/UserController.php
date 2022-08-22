@@ -10,8 +10,9 @@ use DB;
 class UserController extends Controller
 {
     public function index(){
-        $users = DB::select('select * from users');
-        return $users;
+        //$users = DB::select('select * from users');
+        return response()->json(User::all());
+        //return $users;
     }
 
     public function delete($id){

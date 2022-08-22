@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import axios from"axios";
+import axios from "axios";
 import { NavLink, useNavigate } from "react-router-dom";
 import Index from './index';
 
@@ -11,36 +11,47 @@ function Login(){
     const [errors, setErrors] = useState('');
 
     const api = axios.create({
-        baseURL: '',
-        headers: {
-            'Accept': 'application/json',
-        },
+        baseURL: 'http://localhost:8000',
         withCredentials: true,
     })
 
     const sendLogin = async(loginObj) => {
-        await api.get('/sanctum/csrf-cookie').then(response => {
-            api.post('/api/login', loginObj)
-            .then( res => {
-                console.log(res.status);
-                if (res.status == 200){
-                    navigate("/apps/stockmanager/index");
-                }
-            })
-            .catch(error => {
-                console.log(error);
-                if(error.response.status == 401){
-                    setErrors(error.response.data.message);
-                }
-                if(error.response.status == 422){
-                    setErrors(error.response.data.message);
-                }
-                if(error.response.status == 500){
-                    setErrors(error.response.data.message);
-                } else {
-                    console.log(error.response.data.message + " uncaught error");
-                }
-            })
+        api.get('/sanctum/csrf-cookie').then(response => {
+            api.get('/users')
+            .then(response => {
+                console.log(response);
+            });
+            
+            // api.post('/api/login', loginObj).then( res => {
+            //     if (res.status == 200){
+            //         //localStorage.setItem('user', JSON.stringify(response.data))
+            //         // localStorage.setItem('token', res.data.access_token); 
+            //         // navigate("/apps/stockmanager/index");
+            //         getUsers();
+            //     }
+            // })
+            // .catch(error => {
+            //     //console.log(error);
+            //     // if(error.response.status == 401){
+            //     //     setErrors(error.response.data.message);
+            //     // }
+            //     // if(error.response.status == 422){
+            //     //     setErrors(error.response.data.message);
+            //     // }
+            //     // if(error.response.status == 500){
+            //     //     setErrors(error.response.data.message);
+            //     // } else {
+            //     //     console.log(error.response.data.message + " uncaught error");
+            //     // }
+            // })
+        });
+    }
+
+    function getUsers() {
+        api.get('/api/users')
+        // {'Authorization': `Bearer ${localStorage.getItem('token')}`})
+        .then(response => {
+            console.log(response);
         });
     }
 

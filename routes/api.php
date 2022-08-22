@@ -20,18 +20,21 @@ use App\Http\Controllers\Api\StockmanagerController;
 */
 
 // TODOLIST CONTROLLER
-Route::get('/todolist', [TodolistController::class, 'index']);
+
 Route::post('/todolist/add', [TodolistController::class, 'add']);
 Route::delete('/todolist/remove', [TodolistController::class, 'remove']);
 
-
-
- // LOGIN CONTROLLER
-
- Route::post('/login', [LoginController::class, 'authenticate']);
  
+    // LOGIN CONTROLLER
+Route::post('/login', [LoginController::class, 'authenticate'])->name('login');
+
  Route::group(['middleware' => ['auth:sanctum']], function () {
-    // your routes here
+    
+    // your routes here   
+    //TODOLIST 
+    Route::get('/todolist', [TodolistController::class, 'index']);
+
+
     // USERS CONTROLLER
     Route::get('/users', [UserController::class, 'index']);
     Route::delete('/user/{id}', [UserController::class, 'delete']);

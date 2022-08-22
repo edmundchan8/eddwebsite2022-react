@@ -2188,17 +2188,60 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
 
 
 
 
 function Index() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_0__.useState([]),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      user = _React$useState2[0],
+      setUsers = _React$useState2[1];
+
+  var api = axios__WEBPACK_IMPORTED_MODULE_1___default().create({
+    baseURL: '',
+    //Authorization: `Bearer ${localStorage.getItem('token')}`,
+    'Access-Control-Allow-Origin': '*',
+    "Accept": "application/json",
+    withCredentials: true
+  });
+  react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () {
+    api.get('/api/users', {
+      'Authorization': "Bearer ".concat(localStorage.getItem('token'))
+    }).then(function (response) {
+      setUsers(response.data);
+    })["catch"](function (error) {
+      return console.error(error);
+    });
+  }, []);
+  var userList = user.map(function (u) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
+      children: u.name
+    }, u.id);
+  });
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
       children: "Log Out"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h1", {
       children: "Welcome to the Stockmanager page!"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
+      children: userList
     })]
   });
 }
@@ -2272,9 +2315,8 @@ function Login() {
 
   var api = axios__WEBPACK_IMPORTED_MODULE_1___default().create({
     baseURL: '',
-    headers: {
-      'Accept': 'application/json'
-    },
+    // 'Access-Control-Allow-Origin': '*',
+    // "Accept": "application/json",
     withCredentials: true
   });
 
@@ -2284,34 +2326,35 @@ function Login() {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
-              return api.get('/sanctum/csrf-cookie').then(function (response) {
-                api.post('/api/login', loginObj).then(function (res) {
-                  console.log(res.status);
-
-                  if (res.status == 200) {
-                    navigate("/apps/stockmanager/index");
-                  }
-                })["catch"](function (error) {
-                  console.log(error);
-
-                  if (error.response.status == 401) {
-                    setErrors(error.response.data.message);
-                  }
-
-                  if (error.response.status == 422) {
-                    setErrors(error.response.data.message);
-                  }
-
-                  if (error.response.status == 500) {
-                    setErrors(error.response.data.message);
-                  } else {
-                    console.log(error.response.data.message + " uncaught error");
-                  }
-                });
+              api.get('/sanctum/csrf-cookie').then(function (response) {
+                api.get('/api/users') // {'Authorization': `Bearer ${localStorage.getItem('token')}`})
+                .then(function (response) {
+                  console.log(response);
+                }); // api.post('/api/login', loginObj).then( res => {
+                //     if (res.status == 200){
+                //         //localStorage.setItem('user', JSON.stringify(response.data))
+                //         // localStorage.setItem('token', res.data.access_token); 
+                //         // navigate("/apps/stockmanager/index");
+                //         getUsers();
+                //     }
+                // })
+                // .catch(error => {
+                //     //console.log(error);
+                //     // if(error.response.status == 401){
+                //     //     setErrors(error.response.data.message);
+                //     // }
+                //     // if(error.response.status == 422){
+                //     //     setErrors(error.response.data.message);
+                //     // }
+                //     // if(error.response.status == 500){
+                //     //     setErrors(error.response.data.message);
+                //     // } else {
+                //     //     console.log(error.response.data.message + " uncaught error");
+                //     // }
+                // })
               });
 
-            case 2:
+            case 1:
             case "end":
               return _context.stop();
           }
@@ -2323,6 +2366,13 @@ function Login() {
       return _ref.apply(this, arguments);
     };
   }();
+
+  function getUsers() {
+    api.get('/api/users') // {'Authorization': `Bearer ${localStorage.getItem('token')}`})
+    .then(function (response) {
+      console.log(response);
+    });
+  }
 
   function handleLogin(event) {
     event.preventDefault();
